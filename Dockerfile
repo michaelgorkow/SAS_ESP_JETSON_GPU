@@ -10,7 +10,7 @@ COPY ${SASESP_DEBS} /opt/sas_installfiles
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-# apt packages
+# Install apt packages
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
 	python3-pip \
