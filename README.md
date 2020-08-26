@@ -1,7 +1,7 @@
 # SAS Event Stream Processing on Edge Docker Container with GPU acceleration (NVIDIA Jetson Version)
 
 This repository provides build instructions to create your own SAS Event Stream Processing on Edge Docker Container with GPU acceleration.
-Note that this repository is for NVIDIA Jetson, not x86 devices.
+Note that this repository is for NVIDIA Jetson, not x64 devices.
 
 ### Overview
 SAS Event Stream Processing on Edge already offers the possibility to be installed as a Docker container. So, why does this repository exist?
@@ -15,20 +15,25 @@ This repository is privately owned by me. Don't expect any official support for 
 
 ### Requirements
 * Valid SAS Event Stream Processing license file (tested with SAS Event Stream Processing 6.2)
-* System with NVIDIA GPU (tested with RTX2070, RTX3000 and V100)
-* Linux OS (tested with Ubuntu 18.04 and Centos 7)
-* NVIDIA Driver (tested with version 430/450)
-* [NVIDIA Docker](https://github.com/NVIDIA/nvidia-docker)
+* x64 machine (only for downloading the ESP installation files)
+* NVIDIA Jetson device (tested with NVIDIA Jetson TX2)
+* NVIDIA Jetpack (tested with Jetpack 4.3)
+* [NVIDIA Container Runtime on Jetson](https://github.com/NVIDIA/nvidia-docker/wiki/NVIDIA-Container-Runtime-on-Jetson)
 
 ### Container Setup
 1. Pull this repository<br>
 ```
-git clone https://github.com/Mentos05/SAS_ESP_GPU.git
+git clone https://github.com/Mentos05/SAS_ESP_JETSON_GPU.git
 ```
-2. Copy your license file into the repository folder (usually named: SAS_Viya_deployment_data.zip)
-3. Go into the repository folder and run docker build command<br>
+3. Copy your license file into the repository folder (usually named: SAS_Viya_deployment_data.zip)
+4. Run download_esp_debfiles.sh on an x64 machine. The script will download the installation files into the following folder: sas-espedge-125-aarch64_ubuntu_linux_16-apt
 ```
-cd SAS_ESP_GPU
+sh download_esp_debfiles.sh
+```
+5. Copy the folder sas-espedge-125-aarch64_ubuntu_linux_16-apt into the repository folder on your Jetson device. (Simply replace the empty folder)
+4. Go into the repository folder and run docker build command<br>
+```
+cd SAS_ESP_JETSON_GPU
 docker build .  -t esp:gpu
 ```
 
