@@ -1,8 +1,6 @@
-#ARG OPENCV_DEBS=/home/michael/Development/opencv_aarch64
-
 FROM nvcr.io/nvidia/l4t-base:r32.3.1
 # Change to location of your deb files)
-ARG OPENCV_DEBS=opencv-aarch64-deb
+ARG OPENCV_DEBS=opencv-aarch64-deb/opencv-aarch64-deb
 ARG SASESP_DEBS=sas-espedge-125-aarch64_ubuntu_linux_16-apt
 
 RUN mkdir -p /opt/opencv/ && \

@@ -1,0 +1,3 @@
+[submodule "opencv-aarch64-deb"]
+	path = opencv-aarch64-deb
+	url = git://github.com/Mentos05/OpenCV-aarch64-jetson-gpu.git
