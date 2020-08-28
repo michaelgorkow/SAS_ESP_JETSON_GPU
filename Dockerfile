@@ -1,4 +1,7 @@
 FROM nvcr.io/nvidia/l4t-base:r32.3.1
+#Copy qemu to build on x86 host
+COPY qemu-aarch64-static /usr/bin
+
 # Change to location of your deb files)
 ARG OPENCV_DEBS=opencv-aarch64-deb/opencv-aarch64-deb
 ARG SASESP_DEBS=sas-espedge-125-aarch64_ubuntu_linux_16-apt
