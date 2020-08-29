@@ -6,6 +6,8 @@ sas_software_repository="sas-espedge-125-aarch64_ubuntu_linux_16-apt"
 qemu_file="/usr/bin/qemu-aarch64-static"
 container_name="esp_gpu"
 container_tag="6_2_jetson"
+container_build="YES"
+container_push="NO"
 OTHER_ARGUMENTS=()
 
 # User provided variables
@@ -38,6 +40,14 @@ do
         ;;
         -qf*|--qemu_file*)
         qemu_file="${arg#*=}"
+        shift
+        ;;
+        -db*|--docker_build*)
+        docker_build="${arg#*=}"
+        shift
+        ;;
+        -dp*|--docker_push*)
+        docker_push="${arg#*=}"
         shift
         ;;
         *)
@@ -141,12 +151,27 @@ if ! ls $qemu_file 1> /dev/null 2>&1; then
    sudo apt-get update -y
    sudo apt-get install qemu binfmt-support qemu-user-static -y
 else
-   echo "NOTE: qemu installation found. Copying qemu-aarch64-static to repository folder."
+   echo "NOTE: Qemu installation found. Copying qemu-aarch64-static to repository folder."
    cp $qemu_file .
 fi 
 
-# Building Docker Container
-echo "NOTE: Building Docker container $container_name:$container_tag"
-docker build -t $container_name:$container_tag .
+# Building Docker container
+if [ $container_build="YES" ]; then
+   echo "NOTE: Building Docker container $container_name:$container_tag"
+   docker build -t $container_name:$container_tag .
+else
+   echo "NOTE: Skipping docker build."
+fi
+
+# Pushing Docker container
+if [ $container_push="YES" ]; then
+   echo "NOTE: Pushing Docker container $container_name:$container_tag to repository."
+   docker push $container_name:$container_tag
+else
+   echo "NOTE: Skipping docker push."
+fi
+
+echo "Finished."
+exit
 
 
