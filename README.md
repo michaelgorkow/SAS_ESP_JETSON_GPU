@@ -39,13 +39,13 @@ The buildContainer.sh script accepts the following variables:
 
 | Variable | Description | Default |
 | ------ | ------ | ------ |
-| sas_deployment_data | Name of your SAS deployment data file | SAS_Viya_deployment_data.zip |
-| sas_mirrormanager_download_url | URL for SAS Mirror Manager | https://support.sas.com/installation/viya/35/sas-mirror-manager/lax/mirrormgr-linux.tgz |
-| sas_mirrorextensions_download_url | URL for SAS Mirror Manager Extension | https://support.sas.com/installation/viya/35/sas-edge-extension/sas-edge-extension.tgz |
-| sas_software_repository | Name of the SAS software repository | sas-espedge-125-aarch64_ubuntu_linux_16-apt |
-| qemu_file | Path of your Qemu binary | /usr/bin/qemu-aarch64-static |
-| container_name | Docker container name | esp_gpu |
-| container_tag | Docker container tag | 6_2_jetson |
+| --sas_deployment_data | Name of your SAS deployment data file | SAS_Viya_deployment_data.zip |
+| --sas_mirrormanager_download_url | URL for SAS Mirror Manager | https://support.sas.com/installation/viya/35/sas-mirror-manager/lax/mirrormgr-linux.tgz |
+| --sas_mirrorextensions_download_url | URL for SAS Mirror Manager Extension | https://support.sas.com/installation/viya/35/sas-edge-extension/sas-edge-extension.tgz |
+| --sas_software_repository | Name of the SAS software repository | sas-espedge-125-aarch64_ubuntu_linux_16-apt |
+| --qemu_file | Path of your Qemu binary | /usr/bin/qemu-aarch64-static |
+| --container_name | Docker container name | esp_gpu |
+| --container_tag | Docker container tag | 6_2_jetson |
 
 ### Run Container
 Simply use docker run and attach your gpus:
