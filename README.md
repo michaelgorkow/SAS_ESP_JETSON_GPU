@@ -3,6 +3,8 @@
 This repository provides build instructions to create your own SAS Event Stream Processing on Edge Docker Container with GPU acceleration.
 Note that this repository is for NVIDIA Jetson TX2 devices, not x64 devices.
 
+If you are looking for the X64 container please visit my other [GitHub repository](https://github.com/Mentos05/SAS_ESP_GPU).
+
 ### Overview
 SAS Event Stream Processing on Edge already offers the possibility to be installed as a Docker container. So, why does this repository exist?
 Looking at the official [documentation](https://go.documentation.sas.com/?docsetId=dplyesp0phy0lax&docsetTarget=p1rcii2jo7dt9yn1qr1upedc0y3w.htm&docsetVersion=6.2&locale=en) you will notice that the Docker image does not support GPU acceleration.
