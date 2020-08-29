@@ -108,7 +108,7 @@ Some of the Python packages installed are:<br>
 | SAS ESPPy | [SAS ESPPy](https://github.com/sassoftware/python-esppy) |
 | OpenCV | [OpenCV](https://github.com/opencv/opencv) |
 
-For a full ist have a look in the Dockerfile.
+For a full list have a look in the Dockerfile.
 
 ### Share ressources with your container
 If you want to share ressources with your container, e.g. USB webcam, you can do so by adapting your docker run command.<br>
