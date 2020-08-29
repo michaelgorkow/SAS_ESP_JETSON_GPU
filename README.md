@@ -20,7 +20,7 @@ This repository is privately owned by me. Don't expect any official support for 
 ### Requirements
 * Valid SAS Event Stream Processing license file (tested with SAS Event Stream Processing 6.2)
 * x64 machine running Ubuntu (tested with Ubuntu 18.04)
-* [NVIDIA Jetson device](https://developer.nvidia.com/embedded/jetson-tx2) (tested with NVIDIA Jetson TX2)
+* [NVIDIA Jetson TX2](https://developer.nvidia.com/embedded/jetson-tx2)
 * [NVIDIA Jetpack](https://developer.nvidia.com/jetpack-43-archive) (tested with Jetpack 4.3)
 * [NVIDIA Container Runtime on Jetson](https://github.com/NVIDIA/nvidia-docker/wiki/NVIDIA-Container-Runtime-on-Jetson)
 
