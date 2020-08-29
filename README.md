@@ -39,7 +39,7 @@ cp /path/to/your/SAS_Viya_deployment_data.zip .
 bash buildContainer.sh
 ```
 
-### Customize your installation
+### Customize your installation (Optional)
 The buildContainer.sh script accepts user variables.<br>
 Append them to buildContainer.sh with --variable=value<br>
 Example:<br>
@@ -88,7 +88,7 @@ docker run -it --runtime nvidia --net=host -e ESP_PORT 12345 esp_gpu:6_2_jetson
 
 ### Access Jupyter Lab
 Open the following URL in your browser:
-* JupyterLab: http://localhost:8080
+http://localhost:8080
 
 ### Whats next?
 Connect to your container, e.g. via [SAS ESPPy](https://github.com/sassoftware/python-esppy).<br>
