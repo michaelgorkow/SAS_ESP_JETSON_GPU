@@ -61,7 +61,7 @@ bash buildContainer.sh --sas_deployment_data=mydeploymentdata.zip
 ### Run Container
 First, transfer the container to your NVIDIA Jetson TX2. (e.g. via your docker repository).<br>
 
-On your NVIDIA Jetson TX2 use docker run and use nvidia runtime:
+On your NVIDIA Jetson TX2 use docker run and specify nvidia runtime:
 ```
 docker run -it --runtime nvidia --net=host esp_gpu:6_2_jetson
 ```
@@ -122,6 +122,8 @@ docker run -v folder-on-host:folder-on-container --net=host esp_gpu:6_2_jetson
 
 Example: For my needs I usually start my container with the following command to share my local notebooks, my USB webcam, host networking interface and to allow GUI applications (e.g. OpenCV).<br>
 ```
+xhost +
+
 docker run -it --runtime nvidia --privileged=true \
            --net=host --ipc=host \
            -v /home/michael/Development/github.com/:/data/notebooks \
