@@ -42,12 +42,12 @@ do
         qemu_file="${arg#*=}"
         shift
         ;;
-        -db*|--docker_build*)
-        docker_build="${arg#*=}"
+        -cb*|--container_build*)
+        container_build="${arg#*=}"
         shift
         ;;
-        -dp*|--docker_push*)
-        docker_push="${arg#*=}"
+        -cp*|--container_push*)
+        container_push="${arg#*=}"
         shift
         ;;
         *)
