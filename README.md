@@ -30,7 +30,7 @@ cd SAS_ESP_JETSON_GPU
 ```
 2. Copy your deployment data file into the repository folder (usually named: SAS_Viya_deployment_data.zip)
 ```
-cp /path/to/your/deplyomentdata.zip .
+cp /path/to/your/SAS_Viya_deployment_data.zip .
 ```
 3. Run buildContainer.sh. The script will download all required files and build the container.
 ```
@@ -59,7 +59,7 @@ bash buildContainer.sh --sas_deployment_data=mydeploymentdata.zip
 ### Run Container
 First, transfer the container to your NVIDIA Jetson TX2. (e.g. via your docker repository).<br>
 
-On your NVIDIA Jetson TX2 use docker run and attach your gpus:
+On your NVIDIA Jetson TX2 use docker run and use nvidia runtime:
 ```
 docker run -it --runtime nvidia --net=host esp_gpu:6_2_jetson
 ```
@@ -83,11 +83,8 @@ Example: This will run the ESP server on port 12345.
 docker run -it --runtime nvidia --net=host -e ESP_PORT 12345 esp_gpu:6_2_jetson
 ```
 
-You should see something like this:<br>
-![cv](images/running_container.png "cv")
-
 ### Access Jupyter Lab
-Open one of the following URLs in your browser:
+Open the following URL in your browser:
 * JupyterLab: http://localhost:8080
 
 ### Whats next?
@@ -107,6 +104,8 @@ Some of the Python packages installed are:<br>
 | SAS DLPy | [SAS DLPy](https://github.com/sassoftware/python-dlpy) | 
 | SAS ESPPy | [SAS ESPPy](https://github.com/sassoftware/python-esppy) |
 | OpenCV | [OpenCV](https://github.com/opencv/opencv) |
+
+For a full ist have a look in the Dockerfile.
 
 ### Share ressources with your container
 If you want to share ressources with your container, e.g. USB webcam, you can do so by adapting your docker run command.<br>
