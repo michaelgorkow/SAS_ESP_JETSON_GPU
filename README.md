@@ -35,7 +35,7 @@ cp /path/to/your/deplyomentdata.zip .
 bash buildContainer.sh
 ```
 
-The buildContainer.sh script accepts the following variables.<br>
+The buildContainer.sh script accepts user variables.<br>
 Append them to buildContainer.sh with --variable=value<br>
 Example:<br>
 ```
