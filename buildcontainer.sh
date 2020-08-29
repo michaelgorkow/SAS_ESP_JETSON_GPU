@@ -88,6 +88,12 @@ printf '##### %-88s #####\n'
 printf '##### %-88s #####\n' "Docker Container Tag:"
 printf '##### %-88s #####\n' "$container_tag"
 printf '##### %-88s #####\n'
+printf '##### %-88s #####\n' "Build Container:"
+printf '##### %-88s #####\n' "$container_build"
+printf '##### %-88s #####\n'
+printf '##### %-88s #####\n' "Push Container:"
+printf '##### %-88s #####\n' "$container_push"
+printf '##### %-88s #####\n'
 printf '#%.0s' {1..100}; printf '\n';
 printf '#%.0s' {1..100}; printf '\n'; printf '\n';
 
