@@ -1,7 +1,7 @@
-# SAS Event Stream Processing on Edge Docker Container with GPU acceleration (NVIDIA Jetson Version)
+# SAS Event Stream Processing on Edge Docker Container with GPU acceleration (NVIDIA Jetson TX2)
 
 This repository provides build instructions to create your own SAS Event Stream Processing on Edge Docker Container with GPU acceleration.
-Note that this repository is for NVIDIA Jetson, not x64 devices.
+Note that this repository is for NVIDIA Jetson TX2 devices, not x64 devices.
 
 ### Overview
 SAS Event Stream Processing on Edge already offers the possibility to be installed as a Docker container. So, why does this repository exist?
@@ -9,6 +9,8 @@ Looking at the official [documentation](https://go.documentation.sas.com/?docset
 
 However GPU acceleration is needed or at least recommended if you want to work with deep learning.
 For this reason I decided to share my work of creating GPU accelerated for SAS Event Stream Processing.
+
+I mainly use deep learning for Computer Vision - so we are also installing [OpenCV](https://github.com/opencv/opencv) in our container.
 
 Please note:
 This repository is privately owned by me. Don't expect any official support for the work provided here.
@@ -35,6 +37,8 @@ cp /path/to/your/deplyomentdata.zip .
 bash buildContainer.sh
 ```
 
+### Customize your installation
+
 The buildContainer.sh script accepts user variables.<br>
 Append them to buildContainer.sh with --variable=value<br>
 Example:<br>
@@ -53,10 +57,13 @@ bash buildContainer.sh --sas_deployment_data=mydeploymentdata.zip
 | container_tag | Docker container tag | 6_2_jetson |
 
 ### Run Container
-Simply use docker run and attach your gpus:
+First, transfer the container to your NVIDIA Jetson TX2. (e.g. via your docker repository).<br>
+
+On your NVIDIA Jetson TX2 use docker run and attach your gpus:
 ```
-docker run -it --net=host --gpus all esp:gpu
+docker run -it --runtime nvidia --net=host esp_gpu:6_2_jetson
 ```
+
 In many cases you want to extend your run call with additional variables to configure the container.
 
 | Variable | Description | Default |
@@ -70,7 +77,11 @@ In many cases you want to extend your run call with additional variables to conf
 | JUPYTERLAB_PORT | JupyterLab port | 8080 |
 | JUPYTERLAB_NBDIR | JupyterLab notebook directory | /data/notebooks/ |
 
-Example: `docker run -it --net=host -e ESP_PORT 12345 --gpus all esp:gpu` will run the ESP server on port 12345.
+Example: This will run the ESP server on port 12345.
+
+```
+docker run -it --runtime nvidia --net=host -e ESP_PORT 12345 esp_gpu:6_2_jetson
+```
 
 You should see something like this:<br>
 ![cv](images/running_container.png "cv")
@@ -96,30 +107,28 @@ Some of the Python packages installed are:<br>
 | SAS DLPy | [SAS DLPy](https://github.com/sassoftware/python-dlpy) | 
 | SAS ESPPy | [SAS ESPPy](https://github.com/sassoftware/python-esppy) |
 | OpenCV | [OpenCV](https://github.com/opencv/opencv) |
-| OpenPose | [OpenPose](https://github.com/CMU-Perceptual-Computing-Lab/openpose) |
-
-For a full list, please look at the python_sas.yml file in /jupyterlab_environments folder.
-When building your own container, you can add your own environment.yml files into /jupyterlab_environments folder to have customized Python environments.
 
 ### Share ressources with your container
-If you want to share ressources with your container, e.g. a webcam, you can do so by adapting your docker run command.<br>
+If you want to share ressources with your container, e.g. USB webcam, you can do so by adapting your docker run command.<br>
 To share devices, e.g. your webcam, use:
 ```
-docker run --device=/dev/video0:/dev/video0 --net=host esp:gpu
+docker run --device=/dev/video0:/dev/video0 --net=host esp_gpu:6_2_jetson
 ```
 To share a folder, e.g. with additional data like models, projects, etc. use:
 ```
-docker run -v folder-on-host:folder-on-container --net=host esp:gpu
+docker run -v folder-on-host:folder-on-container --net=host esp_gpu:6_2_jetson
 ```
 
-Example: For my needs I usually start my container with the following command to share my local notebooks, my webcam, host networking interface and to allow GUI applications (e.g. Opencv).<br>
+Example: For my needs I usually start my container with the following command to share my local notebooks, my USB webcam, host networking interface and to allow GUI applications (e.g. OpenCV).<br>
 ```
-docker run -it --privileged=true --net=host --ipc=host \
+docker run -it --runtime nvidia --privileged=true \
+           --net=host --ipc=host \
            -v /home/michael/Development/github.com/:/data/notebooks \
+           -v /tmp/.X11-unix:/tmp/.X11-unix \
+           -v /var/run/dbus:/var/run/dbus \
            --device=/dev/video0:/dev/video0 \
-           --gpus all -e DISPLAY=$DISPLAY \
-           -v /tmp/.X11-unix:/tmp/.X11-unix -v /var/run/dbus:/var/run/dbus \
-           esp:gpu
+           -e DISPLAY=$DISPLAY \
+           esp_gpu:6_2_jetson
 ```
 
 ### Run GUI applications inside your Docker container
@@ -130,15 +139,6 @@ Additionally you'll have to provide some information to your container by adding
 -e DISPLAY=$DISPLAY
 -v /tmp/.X11-unix:/tmp/.X11-unix
 ```
-
-### Verify/Monitor GPU Usage
-While you should notice a significant performance improvement while training/scoring your deep learning models you can also monitor GPU usage by using:
-```
-watch -n 1 nvidia-smi
-```
-nvidia-smi should show a esp process.
-![nvidia-smi monitoring](images/nvidia-smi.png "nvidia-smi monitoring")<br>
-Make sure you run this command on your host, not inside the container.
 
 ### Private Repository
 Please Note: This is my private repository and not an official SAS repository.<br>
