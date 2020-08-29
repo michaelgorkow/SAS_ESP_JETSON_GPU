@@ -15,39 +15,27 @@ This repository is privately owned by me. Don't expect any official support for 
 
 ### Requirements
 * Valid SAS Event Stream Processing license file (tested with SAS Event Stream Processing 6.2)
-* x64 machine (only for downloading the ESP installation files)
+* x64 machine running Ubuntu (tested with Ubuntu 18.04)
 * NVIDIA Jetson device (tested with NVIDIA Jetson TX2)
 * NVIDIA Jetpack (tested with Jetpack 4.3)
 * [NVIDIA Container Runtime on Jetson](https://github.com/NVIDIA/nvidia-docker/wiki/NVIDIA-Container-Runtime-on-Jetson)
 
-### Container Setup
+### Container Setup on X64 machine
 1. Pull this repository<br>
 ```
 git clone https://github.com/Mentos05/SAS_ESP_JETSON_GPU.git
-```
-2. Pull the OpenCV submodule
-```
-git submodule init
-git submodule update
-```
-3. Copy your license file into the repository folder (usually named: SAS_Viya_deployment_data.zip)
-4. Run download_esp_debfiles.sh on an x64 machine. The script will download the installation files into the following folder: sas-espedge-125-aarch64_ubuntu_linux_16-apt
-```
-sh download_esp_debfiles.sh
-```
-5. Copy the folder sas-espedge-125-aarch64_ubuntu_linux_16-apt into the repository folder on your Jetson device. (Simply replace the empty folder)
-4. Go into the repository folder and run docker build command<br>
-```
 cd SAS_ESP_JETSON_GPU
-docker build .  -t esp:gpu
+```
+2. Copy your deployment data file into the repository folder (usually named: SAS_Viya_deployment_data.zip)
+```
+cp /path/to/your/deplyomentdata.zip .
+```
+3. Run buildContainer.sh. The script will download all required files and build the container.
+```
+bash buildContainer.sh
 ```
 
-### Run Container
-Simply use docker run and attach your gpus:
-```
-docker run -it --net=host --gpus all esp:gpu
-```
-In many cases you want to extend your run call with additional variables to configure the container.
+The buildContainer.sh script accepts the following variables:
 
 | Variable | Description | Default |
 | ------ | ------ | ------ |
@@ -59,6 +47,23 @@ In many cases you want to extend your run call with additional variables to conf
 | MAS_PYLOG_FILE | MAS logfile location | /opt/maspylog.txt |
 | JUPYTERLAB_PORT | JupyterLab port | 8080 |
 | JUPYTERLAB_NBDIR | JupyterLab notebook directory | /data/notebooks/ |
+
+### Run Container
+Simply use docker run and attach your gpus:
+```
+docker run -it --net=host --gpus all esp:gpu
+```
+In many cases you want to extend your run call with additional variables to configure the container.
+
+| Variable | Description | Default |
+| ------ | ------ | ------ |
+| sas_deployment_data | Name of your SAS deployment data file | SAS_Viya_deployment_data.zip |
+| sas_mirrormanager_download_url | URL for SAS Mirror Manager | https://support.sas.com/installation/viya/35/sas-mirror-manager/lax/mirrormgr-linux.tgz |
+| sas_mirrorextensions_download_url | URL for SAS Mirror Manager Extension | https://support.sas.com/installation/viya/35/sas-edge-extension/sas-edge-extension.tgz |
+| sas_software_repository | Name of the SAS software repository | sas-espedge-125-aarch64_ubuntu_linux_16-apt |
+| qemu_file | Path of your Qemu binary | /usr/bin/qemu-aarch64-static |
+| container_name | Docker container name | esp_gpu |
+| container_tag | Docker container tag | 6_2_jetson |
 
 Example: `docker run -it --net=host -e ESP_PORT 12345 --gpus all esp:gpu` will run the ESP server on port 12345.
 
