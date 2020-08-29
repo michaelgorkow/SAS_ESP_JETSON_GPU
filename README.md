@@ -56,8 +56,8 @@ bash buildContainer.sh --sas_deployment_data=mydeploymentdata.zip
 | qemu_file | Path of your Qemu binary | /usr/bin/qemu-aarch64-static |
 | container_name | Docker container name | esp_gpu |
 | container_tag | Docker container tag | 6_2_jetson |
-| container_build | Build Container | YES |
-| container_push | Push Container to repository | NO |
+| container_build | Build container | YES |
+| container_push | Push container to repository | NO |
 
 ### Run Container
 First, transfer the container to your NVIDIA Jetson TX2. (e.g. via your docker repository).<br>
