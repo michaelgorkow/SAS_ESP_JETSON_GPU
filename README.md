@@ -35,7 +35,12 @@ cp /path/to/your/deplyomentdata.zip .
 bash buildContainer.sh
 ```
 
-The buildContainer.sh script accepts the following variables (appended to buildContainer.sh with --variable=value:
+The buildContainer.sh script accepts the following variables.<br>
+Append them to buildContainer.sh with --variable=value<br>
+Example:<br>
+```
+bash buildContainer.sh --sas_deployment_data=mydeploymentdata.zip
+```
 
 | Variable | Description | Default |
 | ------ | ------ | ------ |
