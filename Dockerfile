@@ -4,7 +4,7 @@ COPY qemu-aarch64-static /usr/bin
 
 # Change to location of your deb files)
 ARG OPENCV_DEBS=opencv-aarch64-deb/opencv-aarch64-deb
-ARG SASESP_DEBS=sas-espedge-125-aarch64_ubuntu_linux_16-apt
+ARG SASESP_DEBS=espedge_repos/sas-espedge-125-aarch64_ubuntu_linux_16-apt
 
 RUN mkdir -p /opt/opencv/ && \
     mkdir -p /opt/sas_installfiles/

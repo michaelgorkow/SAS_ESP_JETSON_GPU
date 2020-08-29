@@ -25,6 +25,11 @@ This repository is privately owned by me. Don't expect any official support for 
 ```
 git clone https://github.com/Mentos05/SAS_ESP_JETSON_GPU.git
 ```
+2. Pull the OpenCV submodule
+```
+git submodule init
+git submodule update
+```
 3. Copy your license file into the repository folder (usually named: SAS_Viya_deployment_data.zip)
 4. Run download_esp_debfiles.sh on an x64 machine. The script will download the installation files into the following folder: sas-espedge-125-aarch64_ubuntu_linux_16-apt
 ```
