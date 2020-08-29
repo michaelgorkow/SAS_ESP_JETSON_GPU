@@ -87,7 +87,7 @@ docker run -it --runtime nvidia --net=host -e ESP_PORT 12345 esp_gpu:6_2_jetson
 ```
 
 ### Access Jupyter Lab
-Open the following URL in your browser:
+Open the following URL in your browser:<br>
 http://localhost:8080
 
 ### Whats next?
