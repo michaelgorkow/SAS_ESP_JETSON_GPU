@@ -67,9 +67,9 @@ RUN pip3 install wheel && \
     pip3 install \
 	pybind11 \
 	mss \
+        swat \
 	git+https://github.com/sassoftware/python-dlpy \
 	git+https://github.com/sassoftware/python-esppy \
-	git+https://github.com/sassoftware/python-swat \
 	ws4py \
 	wsaccel \
 	websocket-client
