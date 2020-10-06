@@ -145,7 +145,7 @@ echo "NOTE: Verifying OpenCV files"
 if ! ls opencv-aarch64-deb/opencv-aarch64-deb/* 1> /dev/null 2>&1; then
    echo "NOTE: Could not find OpenCV files. Getting submodules."
    git submodule init
-   git submodule update
+   git submodule update --recursive --remote
 else
    echo "NOTE: OpenCV files found."
 fi
@@ -156,6 +156,8 @@ if ! ls $qemu_file 1> /dev/null 2>&1; then
    echo "NOTE: Installing qemu for aarch emulation on X64"
    sudo apt-get update -y
    sudo apt-get install qemu binfmt-support qemu-user-static -y
+   qemu_file="/usr/bin/qemu-aarch64-static"
+   cp $qemu_file .
 else
    echo "NOTE: Qemu installation found. Copying qemu-aarch64-static to repository folder."
    cp $qemu_file .
