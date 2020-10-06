@@ -130,7 +130,7 @@ docker run -it --runtime nvidia --privileged=true \
            -v /home/michael/Development/github.com/:/data/notebooks \
            -v /tmp/.X11-unix:/tmp/.X11-unix \
            -v /var/run/dbus:/var/run/dbus \
-           --device=/dev/video0:/dev/video0 \
+           --device=/dev/video1:/dev/video1 \
            -e DISPLAY=$DISPLAY \
            esp_gpu:6_2_jetson
 ```
